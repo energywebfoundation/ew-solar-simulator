@@ -23,12 +23,6 @@ if (!hasCorrectPrivateKey) {
     process.exit(1);
 }
 
-try {
-    web3.eth.accounts.privateKeyToAccount(program.fundingAccount);
-} catch (e) {
-    hasCorrectPrivateKey = false;
-}
-
 const processAssets = async assets => {
     const fundingAccount = web3.eth.accounts.privateKeyToAccount(program.fundingAccount);
 
