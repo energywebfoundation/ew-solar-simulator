@@ -10,6 +10,7 @@ const web3 = new Web3(CONFIG.config.WEB3_URL);
 
 program.option('-i, --input <path>', 'input I-REC csv file');
 program.option('-o, --owner <address>', 'address of the asset owner');
+program.option('-m, --matcher <address>', 'address of the asset matcher');
 
 program.parse(process.argv);
 
@@ -62,8 +63,8 @@ const processAssets = async parsedContent => {
             data: {
                 smartMeter: account.address,
                 smartMeterPKL: account.privateKey,
-                owner: program.owner,
-                matcher: program.matcher,
+                owner: program.owner || '',
+                matcher: program.matcher || '',
                 operationalSince: new Date(registrationDate).getTime() / 1000,
                 capacityWh: maxCapacity,
                 lastSmartMeterReadWh: 0,
