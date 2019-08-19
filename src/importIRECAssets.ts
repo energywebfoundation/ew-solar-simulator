@@ -97,7 +97,7 @@ const processAssets = async parsedContent => {
             type: 'CREATE_PRODUCING_ASSET',
             data: {
                 smartMeter: account.address,
-                smartMeterPKL: account.privateKey,
+                smartMeterPK: account.privateKey,
                 owner: program.owner || '',
                 matcher: program.matcher || '',
                 operationalSince: new Date(registrationDate).getTime() / 1000,
