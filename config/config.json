@@ -1,27 +1,194 @@
 {
-    "assets": [
-        {
-            "id": "0",
-            "maxCapacity": 5000000,
-            "smartMeterPrivateKey": "0x191c4b074672d9eda0ce576cfac79e44e320ffef5e3aadd55e000de57341d36c",
-            "role": "producer",
-            "manufacturer": "",
-            "model": "",
-            "serial_number": "",
-            "latitude": 12.788956,
-            "longitude": 101.851193,
-            "energy_unit": "wattHour",
-            "is_accumulated": true
-        }
-    ],
-    "config": {
-        "ASSET_CONTRACT_LOOKUP_ADDRESS": "0x24B207fFf1a1097d3c3D69fcE461544f83c6E774",
-        "WEB3_URL": "http://localhost:8545",
-        "ENERGY_API_BASE_URL": "http://localhost:3031",
-        "SOLAR_ASSET_GENERATION_TIMEZONE": "Europe/Berlin",
-        "ENERGY_READ_CHECK_INTERVAL": 29000,
-        "SIMULATION": {
-            "PORT": 3031
-        }
+  "assets": [
+    {
+      "id": "0",
+      "maxCapacity": 8536000,
+      "smartMeterPrivateKey": "0xf2fcfd1666c2a5d383c860ec78db5154a408233ea43a3f137e51f9c60041d35b",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.0595,
+      "longitude": 99.9778,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "1",
+      "maxCapacity": 10000000,
+      "smartMeterPrivateKey": "0x5a2ae8cfdfc44be1cf9e195ff7a2d9de88f72ab73115b8f454ea3fc78d6b21d8",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 12.8304,
+      "longitude": 99.9072,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "2",
+      "maxCapacity": 6000000,
+      "smartMeterPrivateKey": "0xb07c1f4ceabcb1df50ea28e3e0affb5ce40ea691d490fe7d09ea479e027ab8f6",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.9989,
+      "longitude": 100.6955,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "3",
+      "maxCapacity": 5950000,
+      "smartMeterPrivateKey": "0xf059f5cd33395176340717adb6259b07c003ccad70826f54e31046dba6c23570",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 17.2124,
+      "longitude": 98.2526,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "4",
+      "maxCapacity": 50000000,
+      "smartMeterPrivateKey": "0xe05f72e68adc61b2db07950be68e1c0fbf915febef0e09c7c6ecab249babba1f",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.9466,
+      "longitude": 101.4474,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "5",
+      "maxCapacity": 5000000,
+      "smartMeterPrivateKey": "0x1a8de058bab5ddd2814d4bc355ef17583d199ab106def50b92c30ce6278e2493",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.1845,
+      "longitude": 101.407,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "6",
+      "maxCapacity": 67500000,
+      "smartMeterPrivateKey": "0xc20d8be65513ddead82bdca2bef0f6bf376d03bca08049e9bb8a8db398164eb2",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 15.1739,
+      "longitude": 101.4928,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "7",
+      "maxCapacity": 10504000,
+      "smartMeterPrivateKey": "0xb4ac4469b04fb517f6a5e3bbc8fc239fe09f0fffbfc1bc8dfe6cf6602d0fca3f",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.3556,
+      "longitude": 99.4694,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "8",
+      "maxCapacity": 10400000,
+      "smartMeterPrivateKey": "0xc6bbf217362d79493e9e94fcef46099d7d42b5f708305e66b2439001be63f9ea",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.6345,
+      "longitude": 99.8905,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "9",
+      "maxCapacity": 10506000,
+      "smartMeterPrivateKey": "0xa38ace0145b9325344252862890757d100c4a1b603931b8c04a491d585b44cfc",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.77709,
+      "longitude": 99.9507,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "10",
+      "maxCapacity": 10400000,
+      "smartMeterPrivateKey": "0xb1be14bf902a6ed51b22a180fbef979a96770d38caa5ef4994ddb44e4af3218a",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.871,
+      "longitude": 99.831,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "11",
+      "maxCapacity": 10400000,
+      "smartMeterPrivateKey": "0x8f2d0bcd1004107039fe86223ca3601d8e8b16928c5d216d59af9c9be8cedc95",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 14.87,
+      "longitude": 99.8335,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "12",
+      "maxCapacity": 60000000,
+      "smartMeterPrivateKey": "0xf0ea03234ebdc86e4a8abf504bb55c007428ab394c51a2d9a27a36acf94dbe65",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 15.1291,
+      "longitude": 101.489,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "13",
+      "maxCapacity": 8900000,
+      "smartMeterPrivateKey": "0x01e1ccd80b0c7dc9dbee6290b99ad4d6a326b76fbe347eb7403ac77d561f1185",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 8.9596,
+      "longitude": 99.222,
+      "energy_unit": "wattHour"
+    },
+    {
+      "id": "14",
+      "maxCapacity": 7000000,
+      "smartMeterPrivateKey": "0x5d187d75a2049731ed46196384fb1f3c501202e4979f6cdc0b0ddb64e2bb55ac",
+      "role": "producer",
+      "manufacturer": "",
+      "model": "",
+      "serial_number": "",
+      "latitude": 9.2818,
+      "longitude": 99.1431,
+      "energy_unit": "wattHour"
     }
+  ],
+  "config": {
+    "ASSET_CONTRACT_LOOKUP_ADDRESS": "0x24B207fFf1a1097d3c3D69fcE461544f83c6E774",
+    "WEB3_URL": "http://localhost:8545",
+    "ENERGY_API_BASE_URL": "http://localhost:3031",
+    "SOLAR_ASSET_GENERATION_TIMEZONE": "Europe/Berlin",
+    "ENERGY_READ_CHECK_INTERVAL": 29000,
+    "SIMULATION": {
+      "PORT": 3031
+    }
+  }
 }
