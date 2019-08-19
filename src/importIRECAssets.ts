@@ -5,12 +5,10 @@ import Web3 from 'web3';
 
 import CONFIG from '../config/config.json';
 
+const configLocation = 'config/config.json';
 const web3 = new Web3(CONFIG.config.WEB3_URL);
-const one = web3.utils.toWei('1');
 
-program
-    .option('-i, --input <path>', 'input I-REC csv file')
-    .option('-o, --owner <string>', 'funding account private key');
+program.option('-i, --input <path>', 'input I-REC csv file');
 
 program.parse(process.argv);
 
@@ -19,32 +17,14 @@ if (!program.input) {
     process.exit(1);
 }
 
-if (!program.owner) {
-    console.error(`Missing -o argument`);
-    process.exit(1);
-}
-
 if (!fs.existsSync(program.input)) {
     console.error(`${program.input} file does not exist`);
     process.exit(1);
 }
 
-let hasCorrectPrivateKey = true;
-
-try {
-    web3.eth.accounts.privateKeyToAccount(program.owner);
-} catch (e) {
-    hasCorrectPrivateKey = false;
-}
-
-if (!hasCorrectPrivateKey) {
-    console.error(`${program.owner} is incorrect private key`);
-    process.exit(1);
-}
-
 const processAssets = async parsedContent => {
     const output = [];
-    const fundingAccount = web3.eth.accounts.privateKeyToAccount(program.owner);
+
     let id = 0;
     for (const asset of parsedContent) {
         console.log('---');
@@ -55,15 +35,6 @@ const processAssets = async parsedContent => {
         const account = web3.eth.accounts.create();
 
         console.log(`Generated smart meter address ${account.address}`);
-
-        const signedTx = await fundingAccount.signTransaction({
-            to: account.address,
-            value: one
-        });
-
-        const fundingTx = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-
-        console.log(`Funding tx from ${fundingAccount.address} to ${account.address} has been broadcasted ${fundingTx.transactionHash}`);
 
         output.push({
             id: (id++).toString(),
@@ -95,7 +66,10 @@ const parseContent = path => {
 
     console.log(`Found ${parsedContent.length} assets in ${program.input}`);
 
-    const output = await processAssets(parsedContent);
+    const assets = await processAssets(parsedContent);
+    const updatedConfig = JSON.stringify({ ...CONFIG, assets }, null, 2);
 
-    console.log(output);
+    fs.writeFileSync(configLocation, updatedConfig);
+
+    console.log(`----- New assets stored in ${configLocation}`);
 })();
