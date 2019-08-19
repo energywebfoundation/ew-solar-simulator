@@ -9,6 +9,7 @@ const configLocation = 'config/config.json';
 const web3 = new Web3(CONFIG.config.WEB3_URL);
 
 program.option('-i, --input <path>', 'input I-REC csv file');
+program.option('-o, --owner <address>', 'address of the asset owner');
 
 program.parse(process.argv);
 
@@ -23,7 +24,8 @@ if (!fs.existsSync(program.input)) {
 }
 
 const processAssets = async parsedContent => {
-    const output = [];
+    const assets = [];
+    const flow = [];
 
     let id = 0;
     for (const asset of parsedContent) {
@@ -31,12 +33,18 @@ const processAssets = async parsedContent => {
         console.log(`Processing ${asset['Device ID']} asset`);
 
         const maxCapacity = parseFloat(asset['Electrical Capacity (MW)']) * 10 ** 6;
+        const country = asset.Country.split(':')[1].trim();
+        const name = asset.Name;
+        const registrationDate = asset['Registration Date'];
+        const latitude = parseFloat(asset.Latitude);
+        const longitude = parseFloat(asset.Longitude);
+        const assetType = asset['Primary Fuel'].split(':')[1].trim();
 
         const account = web3.eth.accounts.create();
 
         console.log(`Generated smart meter address ${account.address}`);
 
-        output.push({
+        assets.push({
             id: (id++).toString(),
             maxCapacity,
             smartMeterPrivateKey: account.privateKey,
@@ -44,13 +52,44 @@ const processAssets = async parsedContent => {
             manufacturer: '',
             model: '',
             serial_number: '',
-            latitude: parseFloat(asset.Latitude),
-            longitude: parseFloat(asset.Longitude),
+            latitude,
+            longitude,
             energy_unit: 'wattHour'
+        });
+
+        flow.push({
+            type: 'CREATE_PRODUCING_ASSET',
+            data: {
+                smartMeter: account.address,
+                smartMeterPKL: account.privateKey,
+                owner: program.owner,
+                matcher: program.matcher,
+                operationalSince: new Date(registrationDate).getTime() / 1000,
+                capacityWh: maxCapacity,
+                lastSmartMeterReadWh: 0,
+                active: true,
+                lastSmartMeterReadFileHash: '',
+                country,
+                region: '',
+                zip: '',
+                city: '',
+                street: '',
+                houseNumber: '',
+                gpsLatitude: latitude.toString(),
+                gpsLongitude: longitude.toString(),
+                assetType,
+                certificatesCreatedForWh: 0,
+                lastSmartMeterCO2OffsetRead: 0,
+                complianceRegistry: 'IREC',
+                otherGreenAttributes: 'N.A.',
+                typeOfPublicSupport: 'N.A',
+                maxOwnerChanges: 1000,
+                facilityName: name
+            }
         });
     }
 
-    return output;
+    return { assets, flow };
 };
 
 const parseContent = path => {
@@ -66,10 +105,12 @@ const parseContent = path => {
 
     console.log(`Found ${parsedContent.length} assets in ${program.input}`);
 
-    const assets = await processAssets(parsedContent);
+    const { assets, flow } = await processAssets(parsedContent);
     const updatedConfig = JSON.stringify({ ...CONFIG, assets }, null, 2);
 
     fs.writeFileSync(configLocation, updatedConfig);
 
     console.log(`----- New assets stored in ${configLocation}`);
+
+    console.log(JSON.stringify(flow, null, 2));
 })();
