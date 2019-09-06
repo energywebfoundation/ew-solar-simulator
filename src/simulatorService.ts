@@ -1,9 +1,9 @@
-import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import parse from 'csv-parse/lib/sync';
+import express from 'express';
 import fs from 'fs-extra';
 import moment from 'moment';
-import parse from 'csv-parse/lib/sync';
 import CONFIG from '../config/config.json';
 
 const PORT = CONFIG.config.SIMULATION.PORT || 3031;
@@ -28,7 +28,6 @@ interface IAssetGetResponse {
     latitude: number;
     longitude: number;
     energy_unit: ENERGY_UNIT;
-    is_accumulated: boolean;
 }
 
 const ENERGY_UNIT_TO_RATIO_MAPPING = {
@@ -119,6 +118,8 @@ async function getData() {
 
     const fileContent = await fs.readFile(`${__dirname}/../config/data.csv`);
     DATA = parse(fileContent, { columns: false, trim: true });
+
+    return DATA;
 }
 
 export async function startAPI() {
@@ -188,8 +189,7 @@ export async function startAPI() {
             serial_number: asset.serial_number,
             latitude: asset.latitude,
             longitude: asset.longitude,
-            energy_unit: ENERGY_UNIT[asset.energy_unit],
-            is_accumulated: asset.is_accumulated
+            energy_unit: ENERGY_UNIT[asset.energy_unit]
         };
 
         return res.json(response);
